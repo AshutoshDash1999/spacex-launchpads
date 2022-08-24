@@ -19,7 +19,7 @@ function Launches() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [launch_id]);
   return (
     <div className="text-gray-200 w-2/3 border-2">
       {launchData ? (
