@@ -9,60 +9,32 @@ function Launches() {
   console.log(launch_id);
   useEffect(() => {
     const launch_url = `https://api.spacexdata.com/v3/launches/${launch_id}`;
-    console.log(launch_url);
-
     axios
       .get(launch_url)
       .then((response) => {
         setLaunchData(response.data);
+        console.log(response.data);
+        
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [launch_id]);
+  }, []);
+  console.log(launchData);
+  
   return (
-    <div className="text-gray-200 w-2/3 border-2">
-      {launchData ? (
-        <div className="">
-          <div className="flex justify-between">
-            <div>
-              <p className="text-2xl font-bold">
-                Mission Name: {launchData["mission_name"]}
-              </p>
-              <p>Launch Year: {launchData["launch_year"]}</p>
-              <p>Launch Site: {launchData["launch_site"]["site_name_long"]}</p>
-              <p className="underline underline-offset-4">
-                <a href={launchData["links"]["wikipedia"]}>Wikipedia Article</a>
-              </p>
-            </div>
-            <div>
-              <img
-                className="h-48"
-                src={launchData["links"]["mission_patch"]}
-                alt=""
-              />
-            </div>
-          </div>
-          {/* {
-          launchData["links"]["youtube_id"]?
-          
-        <div className="p-4 flex justify-center">
-          <iframe
-          width="560"
-          height="315"
-            src={youtubeUrl}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            ></iframe>
+    <div className="text-gray-200 flex justify-center">
+      <div className="flex justify-between w-2/3 border-2 p-4 border-[#6cb8ba] bg-[#112240] rounded-lg">
+        <div>
+          <p className="text-3xl font-bold">{launchData["mission_name"]}</p>
+          <p><span className="font-bold">Launch Date: </span> <span className="italic">{launchData["launch_year"]}</span></p>
+           {/* <p><span className="font-bold">Launch Site: </span> <span className="italic">{launchData["site"]["site_name_long"]}</span></p> */}
+          {/* <p><a className="underline underline-offset-4" href={launchData["links"]["wikipedia"]}>Wikipedia</a> <a className="underline underline-offset-4" href="">News Article</a></p>  */}
         </div>
-          :
-        } */}
+        <div>
+          {/* <img className="h-48" src={launchData["links"]["mission_patch"]} alt="" /> */}
         </div>
-      ) : (
-        <div></div>
-      )}
+      </div>
     </div>
   );
 }
